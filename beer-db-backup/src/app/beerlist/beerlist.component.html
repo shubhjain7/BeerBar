@@ -1,0 +1,92 @@
+<p>beerlist works!</p>
+<mat-toolbar >
+    <h3>Beer Details List</h3>
+    <span class="spacer"></span>
+    <div > <mat-form-field class="example-full-width">
+      <mat-label>Search by name</mat-label>
+      <input matInput placeholder="Search"  type="text" name="brand" (ngModelChange)="searchBrand()" [(ngModel)]="brand" >
+    </mat-form-field></div>
+  
+  </mat-toolbar>
+  <mat-spinner *ngIf="loadin" color="skyblue"></mat-spinner>
+  <table mat-table [dataSource]="beers" class="mat-elevation-z8"  *ngIf="beers.length>0 && !loadin">
+  
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="images">
+      <th mat-header-cell *matHeaderCellDef> Image </th>
+      <td mat-cell *matCellDef="let beer" ><img  [src]=beer.imagePath alt="beer.imagePath" class="float-left" style="max-height: 30px;"></td>
+        
+  </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let beer"> {{beer.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let beer"> {{beer.name}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="abv">
+      <th mat-header-cell *matHeaderCellDef> ABV </th>
+      <td mat-cell *matCellDef="let beer"> {{beer.abv}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="ibu">
+      <th mat-header-cell *matHeaderCellDef> IBU </th>
+      <td mat-cell *matCellDef="let beer"> {{beer.ibu}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="style">
+      <th mat-header-cell *matHeaderCellDef> Style </th>
+      <td mat-cell *matCellDef="let beer"> {{beer.style}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ounces">
+        <th mat-header-cell *matHeaderCellDef> Ounces </th>
+        <td mat-cell *matCellDef="let beer"> {{beer.ounces}} </td>
+      </ng-container>
+  
+    <!-- <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let invoice">
+    <button mat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        <span>View</span>
+      </button>
+      <button mat-menu-item (click)="onEdit(invoice.id)">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="onDelete(invoice.id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </td>
+   </ng-container> -->
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator
+      [length]="totalBeers"
+      [pageSize]="beersPerPage"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onChangePage($event)"
+      *ngIf="beers.length>0"></mat-paginator>
+  
+  <p class="mat-body-1" *ngIf="beers.length<=0 && !loadin" style="text-align: center;">No Beers to Show</p>
+  
+  
+  

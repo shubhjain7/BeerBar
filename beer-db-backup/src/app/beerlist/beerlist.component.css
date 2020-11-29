@@ -1,0 +1,27 @@
+table{
+    width: 100%;
+  }
+  
+  
+  
+  .spacer{
+    flex: 1 1 auto;
+  }
+  
+  .mat-row {
+    height: auto;
+  }
+  
+  .mat-cell {
+    padding: 8px 8px 8px 0;
+  }
+  
+  mat-spinner{
+    margin: auto;
+  }
+  
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
